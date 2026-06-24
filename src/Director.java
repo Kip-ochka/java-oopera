@@ -8,6 +8,6 @@ public class Director extends Person {
 
     @Override
     public String toString() {
-        return getName() + " " + getSurname();
+        return name + " " + surname;
     }
 }

@@ -1,20 +1,16 @@
 import java.util.ArrayList;
 
 public class Show {
-    private final String title;
-    private final int duration;
-    private final Director director;
-    private final ArrayList<Actor> listOfActors;
+    protected final String title;
+    protected final int duration;
+    protected final Director director;
+    protected final ArrayList<Actor> listOfActors;
 
     public Show(String title, int duration, Director director) {
         this.title = title;
         this.duration = duration;
         this.director = director;
         this.listOfActors = new ArrayList<>();
-    }
-
-    public String getTitle() {
-        return title;
     }
 
     public void printActors() {
@@ -41,15 +37,30 @@ public class Show {
     }
 
     public void replaceActor(Actor newActor, String surname) {
+        ArrayList<Integer> matches = new ArrayList<>();
         for (int i = 0; i < listOfActors.size(); i++) {
-            if (listOfActors.get(i).getSurname().equals(surname)) {
-                listOfActors.set(i, newActor);
-                System.out.println("В спектакле \"" + title + "\" актёр с фамилией "
-                        + surname + " заменён на " + newActor);
-                return;
+            if (listOfActors.get(i).surname.equals(surname)) {
+                matches.add(i);
             }
         }
-        System.out.println("Внимание: актёр с фамилией \"" + surname
-                + "\" не найден в спектакле \"" + title + "\". Замена не выполнена.");
+        if (matches.isEmpty()) {
+            System.out.println("Внимание: актёр с фамилией \"" + surname
+                    + "\" не найден в спектакле \"" + title + "\". Замена не выполнена.");
+            return;
+        }
+        if (matches.size() > 1) {
+            System.out.println("Внимание: в спектакле \"" + title
+                    + "\" найдено несколько актёров с фамилией \"" + surname
+                    + "\" (" + matches.size() + "). Уточните, кого именно заменить:");
+            for (int id : matches) {
+                System.out.println("  [" + id + "] " + listOfActors.get(id));
+            }
+            System.out.println("Замена не выполнена.");
+            return;
+        }
+
+        listOfActors.set(matches.getFirst(), newActor);
+        System.out.println("В спектакле \"" + title + "\" актёр с фамилией "
+                + surname + " заменён на " + newActor);
     }
 }

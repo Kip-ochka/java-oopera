@@ -10,7 +10,7 @@ public class Actor extends Person {
 
     @Override
     public String toString() {
-        return getName() + " " + getSurname() + " (" + height + ")";
+        return name + " " + surname + " (" + height + ")";
     }
 
     @Override
@@ -19,12 +19,12 @@ public class Actor extends Person {
         if (o == null || getClass() != o.getClass()) return false;
         Actor actor = (Actor) o;
         return height == actor.height
-                && Objects.equals(getName(), actor.getName())
-                && Objects.equals(getSurname(), actor.getSurname());
+                && Objects.equals(name, actor.name)
+                && Objects.equals(surname, actor.surname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getSurname(), height);
+        return Objects.hash(super.hashCode(), height);
     }
 }

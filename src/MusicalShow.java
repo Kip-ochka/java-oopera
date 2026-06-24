@@ -9,7 +9,7 @@ public class MusicalShow extends Show {
     }
 
     public void printLibretto() {
-        System.out.println("Либретто спектакля \"" + getTitle() + "\":");
+        System.out.println("Либретто спектакля \"" + title + "\":");
         System.out.println(librettoText);
     }
 }
